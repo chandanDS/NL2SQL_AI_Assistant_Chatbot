@@ -16,6 +16,9 @@ Current local baseline (2026-09-13):
 
 Warnings currently come from upstream Starlette/FastAPI deprecations and do not fail the gate.
 
+GitHub Actions runs this same PostgreSQL-backed gate before any Cloud Run deployment.
+See `.github/workflows/ci-cd.yml` and `deploy/GCP_CICD_SETUP.md`.
+
 ## Golden dataset
 
 `tests/golden/banking_questions.jsonl` contains 200 version-controlled cases across:

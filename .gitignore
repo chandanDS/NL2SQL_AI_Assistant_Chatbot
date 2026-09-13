@@ -11,3 +11,4 @@ htmlcov/
 outputs/
 .vscode/
 *.log
+gha-creds-*.json
