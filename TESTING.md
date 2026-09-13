@@ -10,7 +10,7 @@
 Current local baseline (2026-09-13):
 
 - 259 tests passed
-- 90% backend statement coverage
+- Minimum 80% backend statement coverage (current clean Linux baseline: 82.17%)
 - 200-question golden dataset passed offline routing evaluation
 - Formula, intent, RBAC, JWT, SQL injection, prompt injection, API integration, and E2E flows covered
 

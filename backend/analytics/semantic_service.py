@@ -133,5 +133,5 @@ async def execute_semantic_query(
         rows=rows,
         row_count=len(rows),
         insights=insights,
-        generated_sql=sql if get_settings().environment == "development" else None,
+        generated_sql=sql if get_settings().environment != "production" else None,
     )

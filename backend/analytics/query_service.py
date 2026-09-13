@@ -130,5 +130,5 @@ async def execute_analytics_query(
         growth_percent=growth,
         row_count=row_count,
         formula_version=catalogue.version,
-        generated_sql=generated_sql if get_settings().environment == "development" else None,
+        generated_sql=generated_sql if get_settings().environment != "production" else None,
     )
