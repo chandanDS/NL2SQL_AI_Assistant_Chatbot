@@ -69,14 +69,6 @@ def render_result(result: dict, key_suffix: str) -> None:
         },
     )
 
-    if result.get("generated_sql"):
-        with st.expander("Generated SQL (development only)", icon=":material/code:"):
-            st.caption("Read-only SQL executed after KPI validation and organization-scope enforcement.")
-            for index, query in enumerate(result["generated_sql"], start=1):
-                if len(result["generated_sql"]) > 1:
-                    st.markdown(f"**Query {index}**")
-                st.code(query, language="sql")
-
     st.download_button(
         "Download result as CSV",
         data=frame.to_csv(index=False).encode("utf-8"),
@@ -105,8 +97,3 @@ def render_semantic_result(result: dict, key_suffix: str) -> None:
         )
     else:
         st.info("No data matched this dynamic query and your permitted organization scope.")
-
-    if result.get("generated_sql"):
-        with st.expander("Generated SQL (development only)", icon=":material/code:"):
-            st.caption("Dynamically compiled from a validated semantic plan with mandatory RBAC filtering.")
-            st.code(result["generated_sql"], language="sql")
