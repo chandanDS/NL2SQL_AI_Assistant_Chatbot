@@ -40,8 +40,8 @@ jobs:
       OPENAI_API_KEY: test-key-not-used
       LOG_TO_CONSOLE: "true"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -59,8 +59,8 @@ jobs:
       - name: Run migrations and seed synthetic test data
         run: |
           alembic upgrade head
-          python data_generator/seed_identity.py
-          python data_generator/seed_banking_facts.py
+          python -m data_generator.seed_identity
+          python -m data_generator.seed_banking_facts
       - name: Grant read-only analytics access
         env:
           PGPASSWORD: postgres
@@ -73,7 +73,7 @@ jobs:
           ALTER ROLE banking_reader SET default_transaction_read_only = on;
           SQL
       - name: Validate synthetic banking relationships
-        run: python scripts/validate_banking_data.py
+        run: python -m scripts.validate_banking_data
       - name: Run complete release gate
         run: pytest --cov=backend --cov-fail-under=90 --cov-report=term --cov-report=xml:coverage.xml -q
       - name: Upload coverage report
@@ -102,7 +102,7 @@ jobs:
       CLOUD_SQL_INSTANCE: ${{ vars.GCP_CLOUD_SQL_INSTANCE }}
       RUNTIME_SERVICE_ACCOUNT: ${{ vars.GCP_RUNTIME_SERVICE_ACCOUNT }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - id: auth
         uses: google-github-actions/auth@v3
         with:
