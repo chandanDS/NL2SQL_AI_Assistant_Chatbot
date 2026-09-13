@@ -12,6 +12,7 @@ Configure these under **Settings → Secrets and variables → Actions → Varia
 
 | Variable | Example |
 |---|---|
+| `GCP_DEPLOY_ENABLED` | `true` after GCP setup is complete; omit or set `false` to run CI without deployment |
 | `GCP_PROJECT_ID` | `my-banking-poc` |
 | `GCP_REGION` | `asia-south1` |
 | `GCP_ARTIFACT_REPOSITORY` | `banking-nl2sql` |
@@ -24,6 +25,19 @@ Configure these under **Settings → Secrets and variables → Actions → Varia
 | `GCP_WORKLOAD_IDENTITY_PROVIDER` | full Workload Identity Provider resource name |
 
 No service-account JSON key is required.
+
+`GCP_WORKLOAD_IDENTITY_PROVIDER` must be the complete provider resource name,
+not only its display name. It has this format:
+
+```text
+projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID
+```
+
+Keep `GCP_DEPLOY_ENABLED` unset (or `false`) while the GCP resources and GitHub
+variables are being prepared. CI tests will still run, but the deployment job will
+be skipped. Set it to `true` only after every variable in the table has a value.
+When enabled, the workflow validates all required values before authentication and
+reports their variable names if any are missing.
 
 ## Secret Manager secrets
 
@@ -78,7 +92,8 @@ only the intended `OWNER/REPOSITORY` can impersonate the deploy service account.
 ## Release behavior
 
 - Pull requests run CI only.
-- Pushes to `main` run CI and deploy only after CI succeeds.
+- Pushes to `main` run CI; deployment runs after CI succeeds when
+  `GCP_DEPLOY_ENABLED` is `true`.
 - Images use the immutable Git commit SHA.
 - Alembic migrations complete before the API and UI roll out.
 - GitHub's `production` environment can require a manual approver.
