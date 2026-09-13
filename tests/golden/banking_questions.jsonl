@@ -1,0 +1,200 @@
+{"id": "BQ-001", "question": "Show total savings deposit amount for January 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-002", "question": "Show total savings deposit amount for February 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-003", "question": "Show total savings deposit amount for March 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-004", "question": "Show total savings deposit amount for April 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-005", "question": "Show total savings deposit amount for May 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-006", "question": "Show total savings deposit amount for June 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-007", "question": "Show total savings deposit amount for August 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-008", "question": "Show total savings deposit amount for September 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": ["SA"]}
+{"id": "BQ-009", "question": "Show number of CASA accounts for January 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-010", "question": "Show number of CASA accounts for February 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-011", "question": "Show number of CASA accounts for March 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-012", "question": "Show number of CASA accounts for April 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-013", "question": "Show number of CASA accounts for May 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-014", "question": "Show number of CASA accounts for June 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-015", "question": "Show number of CASA accounts for August 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-016", "question": "Show number of CASA accounts for September 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_ACCOUNT_COUNT", "products": ["CA", "SA"]}
+{"id": "BQ-017", "question": "Show new current accounts opened in January 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-018", "question": "Show new current accounts opened in February 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-019", "question": "Show new current accounts opened in March 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-020", "question": "Show new current accounts opened in April 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-021", "question": "Show new current accounts opened in May 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-022", "question": "Show new current accounts opened in June 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-023", "question": "Show new current accounts opened in August 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-024", "question": "Show new current accounts opened in September 2026", "expected_route": "deterministic", "module": "DEPOSITS", "kpi": "DEPOSIT_NEW_ACCOUNTS", "products": ["CA"]}
+{"id": "BQ-025", "question": "Show home loan outstanding amount for January 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-026", "question": "Show home loan outstanding amount for February 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-027", "question": "Show home loan outstanding amount for March 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-028", "question": "Show home loan outstanding amount for April 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-029", "question": "Show home loan outstanding amount for May 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-030", "question": "Show home loan outstanding amount for June 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-031", "question": "Show home loan outstanding amount for August 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-032", "question": "Show home loan outstanding amount for September 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_OUTSTANDING_AMOUNT", "products": ["HL"]}
+{"id": "BQ-033", "question": "Show number of MSME loan accounts for January 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-034", "question": "Show number of MSME loan accounts for February 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-035", "question": "Show number of MSME loan accounts for March 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-036", "question": "Show number of MSME loan accounts for April 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-037", "question": "Show number of MSME loan accounts for May 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-038", "question": "Show number of MSME loan accounts for June 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-039", "question": "Show number of MSME loan accounts for August 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-040", "question": "Show number of MSME loan accounts for September 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_ACCOUNT_COUNT", "products": ["MSME"]}
+{"id": "BQ-041", "question": "Show vehicle loan disbursement for January 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-042", "question": "Show vehicle loan disbursement for February 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-043", "question": "Show vehicle loan disbursement for March 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-044", "question": "Show vehicle loan disbursement for April 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-045", "question": "Show vehicle loan disbursement for May 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-046", "question": "Show vehicle loan disbursement for June 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-047", "question": "Show vehicle loan disbursement for August 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-048", "question": "Show vehicle loan disbursement for September 2026", "expected_route": "deterministic", "module": "ADVANCES", "kpi": "ADVANCE_DISBURSEMENT_AMOUNT", "products": ["VL"]}
+{"id": "BQ-049", "question": "Show SMA2 outstanding amount for January 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-050", "question": "Show SMA2 outstanding amount for February 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-051", "question": "Show SMA2 outstanding amount for March 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-052", "question": "Show SMA2 outstanding amount for April 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-053", "question": "Show SMA2 outstanding amount for May 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-054", "question": "Show SMA2 outstanding amount for June 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-055", "question": "Show SMA2 outstanding amount for August 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-056", "question": "Show SMA2 outstanding amount for September 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_OUTSTANDING_AMOUNT", "products": ["SMA2"]}
+{"id": "BQ-057", "question": "Show number of doubtful accounts for January 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-058", "question": "Show number of doubtful accounts for February 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-059", "question": "Show number of doubtful accounts for March 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-060", "question": "Show number of doubtful accounts for April 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-061", "question": "Show number of doubtful accounts for May 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-062", "question": "Show number of doubtful accounts for June 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-063", "question": "Show number of doubtful accounts for August 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-064", "question": "Show number of doubtful accounts for September 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_ACCOUNT_COUNT", "products": ["DOUBTFUL"]}
+{"id": "BQ-065", "question": "Show NPA recovery for January 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-066", "question": "Show NPA recovery for February 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-067", "question": "Show NPA recovery for March 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-068", "question": "Show NPA recovery for April 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-069", "question": "Show NPA recovery for May 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-070", "question": "Show NPA recovery for June 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-071", "question": "Show NPA recovery for August 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-072", "question": "Show NPA recovery for September 2026", "expected_route": "deterministic", "module": "NPA_SMA", "kpi": "ASSET_QUALITY_RECOVERY_AMOUNT", "products": []}
+{"id": "BQ-073", "question": "Show registered UPI customers for January 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-074", "question": "Show registered UPI customers for February 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-075", "question": "Show registered UPI customers for March 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-076", "question": "Show registered UPI customers for April 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-077", "question": "Show registered UPI customers for May 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-078", "question": "Show registered UPI customers for June 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-079", "question": "Show registered UPI customers for August 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-080", "question": "Show registered UPI customers for September 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_REGISTERED_CUSTOMERS", "products": ["UPI"]}
+{"id": "BQ-081", "question": "Show active mobile banking customers for January 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-082", "question": "Show active mobile banking customers for February 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-083", "question": "Show active mobile banking customers for March 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-084", "question": "Show active mobile banking customers for April 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-085", "question": "Show active mobile banking customers for May 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-086", "question": "Show active mobile banking customers for June 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-087", "question": "Show active mobile banking customers for August 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-088", "question": "Show active mobile banking customers for September 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_ACTIVE_CUSTOMERS", "products": ["MOBILE_BANKING"]}
+{"id": "BQ-089", "question": "Show UPI transaction count for January 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-090", "question": "Show UPI transaction count for February 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-091", "question": "Show UPI transaction count for March 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-092", "question": "Show UPI transaction count for April 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-093", "question": "Show UPI transaction count for May 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-094", "question": "Show UPI transaction count for June 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-095", "question": "Show UPI transaction count for August 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-096", "question": "Show UPI transaction count for September 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_COUNT", "products": ["UPI"]}
+{"id": "BQ-097", "question": "Show debit card transaction amount for January 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-098", "question": "Show debit card transaction amount for February 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-099", "question": "Show debit card transaction amount for March 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-100", "question": "Show debit card transaction amount for April 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-101", "question": "Show debit card transaction amount for May 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-102", "question": "Show debit card transaction amount for June 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-103", "question": "Show debit card transaction amount for August 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-104", "question": "Show debit card transaction amount for September 2026", "expected_route": "deterministic", "module": "DIGITAL", "kpi": "DIGITAL_TRANSACTION_AMOUNT", "products": ["DEBIT_CARD"]}
+{"id": "BQ-105", "question": "Show average home loan ticket size for January 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-106", "question": "Show average home loan ticket size for February 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-107", "question": "Show average home loan ticket size for March 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-108", "question": "Show average home loan ticket size for April 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-109", "question": "Show average home loan ticket size for May 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-110", "question": "Show average home loan ticket size for June 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-111", "question": "Show average home loan ticket size for August 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-112", "question": "Show average home loan ticket size for September 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-113", "question": "Show overdue amount as percentage of advances for January 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-114", "question": "Show overdue amount as percentage of advances for February 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-115", "question": "Show overdue amount as percentage of advances for March 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-116", "question": "Show overdue amount as percentage of advances for April 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-117", "question": "Show overdue amount as percentage of advances for May 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-118", "question": "Show overdue amount as percentage of advances for June 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-119", "question": "Show overdue amount as percentage of advances for August 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-120", "question": "Show overdue amount as percentage of advances for September 2026", "expected_route": "dynamic", "module": "ADVANCES", "kpi": null, "products": []}
+{"id": "BQ-121", "question": "Show average savings balance per account for January 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-122", "question": "Show average savings balance per account for February 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-123", "question": "Show average savings balance per account for March 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-124", "question": "Show average savings balance per account for April 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-125", "question": "Show average savings balance per account for May 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-126", "question": "Show average savings balance per account for June 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-127", "question": "Show average savings balance per account for August 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-128", "question": "Show average savings balance per account for September 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-129", "question": "Rank branches by current account balance for January 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-130", "question": "Rank branches by current account balance for February 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-131", "question": "Rank branches by current account balance for March 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-132", "question": "Rank branches by current account balance for April 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-133", "question": "Rank branches by current account balance for May 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-134", "question": "Rank branches by current account balance for June 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-135", "question": "Rank branches by current account balance for August 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-136", "question": "Rank branches by current account balance for September 2026", "expected_route": "dynamic", "module": "DEPOSITS", "kpi": null, "products": []}
+{"id": "BQ-137", "question": "Show recovery to slippage ratio for January 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-138", "question": "Show recovery to slippage ratio for February 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-139", "question": "Show recovery to slippage ratio for March 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-140", "question": "Show recovery to slippage ratio for April 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-141", "question": "Show recovery to slippage ratio for May 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-142", "question": "Show recovery to slippage ratio for June 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-143", "question": "Show recovery to slippage ratio for August 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-144", "question": "Show recovery to slippage ratio for September 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-145", "question": "Show average NPA outstanding per account for January 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-146", "question": "Show average NPA outstanding per account for February 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-147", "question": "Show average NPA outstanding per account for March 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-148", "question": "Show average NPA outstanding per account for April 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-149", "question": "Show average NPA outstanding per account for May 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-150", "question": "Show average NPA outstanding per account for June 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-151", "question": "Show average NPA outstanding per account for August 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-152", "question": "Show average NPA outstanding per account for September 2026", "expected_route": "dynamic", "module": "NPA_SMA", "kpi": null, "products": []}
+{"id": "BQ-153", "question": "Show active customer percentage by product for January 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-154", "question": "Show active customer percentage by product for February 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-155", "question": "Show active customer percentage by product for March 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-156", "question": "Show active customer percentage by product for April 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-157", "question": "Show active customer percentage by product for May 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-158", "question": "Show active customer percentage by product for June 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-159", "question": "Show active customer percentage by product for August 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-160", "question": "Show active customer percentage by product for September 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-161", "question": "Show transaction amount per active customer for January 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-162", "question": "Show transaction amount per active customer for February 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-163", "question": "Show transaction amount per active customer for March 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-164", "question": "Show transaction amount per active customer for April 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-165", "question": "Show transaction amount per active customer for May 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-166", "question": "Show transaction amount per active customer for June 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-167", "question": "Show transaction amount per active customer for August 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-168", "question": "Show transaction amount per active customer for September 2026", "expected_route": "dynamic", "module": "DIGITAL", "kpi": null, "products": []}
+{"id": "BQ-169", "question": "Show deposits for bank as a whole in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-170", "question": "Show deposits for entire bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-171", "question": "Show deposits for bank-wide in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-172", "question": "Show deposits for across the bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-173", "question": "Show deposits for bank as a whole in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-174", "question": "Show deposits for entire bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-175", "question": "Show deposits for bank-wide in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-176", "question": "Show deposits for across the bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-177", "question": "Show deposits for bank as a whole in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-178", "question": "Show deposits for entire bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-179", "question": "Show deposits for bank-wide in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-180", "question": "Show deposits for across the bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-181", "question": "Show deposits for bank as a whole in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-182", "question": "Show deposits for entire bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-183", "question": "Show deposits for bank-wide in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-184", "question": "Show deposits for across the bank in September 2026", "expected_route": "rbac_denied", "module": "DEPOSITS", "kpi": "DEPOSIT_BUSINESS_AMOUNT", "products": []}
+{"id": "BQ-185", "question": "Tell me the banking result for case 1", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-186", "question": "Tell me the banking result for case 2", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-187", "question": "Tell me the banking result for case 3", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-188", "question": "Tell me the banking result for case 4", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-189", "question": "Tell me the banking result for case 5", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-190", "question": "Tell me the banking result for case 6", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-191", "question": "Tell me the banking result for case 7", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-192", "question": "Tell me the banking result for case 8", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-193", "question": "Tell me the banking result for case 9", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-194", "question": "Tell me the banking result for case 10", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-195", "question": "Tell me the banking result for case 11", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-196", "question": "Tell me the banking result for case 12", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-197", "question": "Tell me the banking result for case 13", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-198", "question": "Tell me the banking result for case 14", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-199", "question": "Tell me the banking result for case 15", "expected_route": "clarification", "module": null, "kpi": null, "products": []}
+{"id": "BQ-200", "question": "Tell me the banking result for case 16", "expected_route": "clarification", "module": null, "kpi": null, "products": []}

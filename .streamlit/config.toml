@@ -1,0 +1,22 @@
+[server]
+port = 8501
+headless = false
+runOnSave = true
+enableStaticServing = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#0072BC"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#EEF7FD"
+textColor = "#12324A"
+
+[theme.sidebar]
+backgroundColor = "#0067A8"
+secondaryBackgroundColor = "#0B77B8"
+textColor = "#FFFFFF"
+primaryColor = "#FFD54A"
+borderColor = "#2B86BB"
