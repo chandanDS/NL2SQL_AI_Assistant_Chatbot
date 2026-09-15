@@ -33,6 +33,18 @@ st.html("""
     background: rgba(0, 103, 168, 0.97);
     backdrop-filter: blur(10px);
 }
+[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+    padding-top: 0.65rem;
+    padding-bottom: 0.5rem;
+}
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+    gap: 0.4rem;
+}
+[data-testid="stSidebar"] .stButton button {
+    min-height: 2.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
 .canara-brand-strip {
     display: flex;
     justify-content: flex-end;
@@ -294,16 +306,19 @@ def sidebar_query_usage() -> None:
     ])
     st.dataframe(
         token_table,
+        height=188,
+        row_height=25,
         hide_index=True,
         column_config={
-            "Stage": st.column_config.TextColumn("Processing stage"),
+            "Stage": st.column_config.TextColumn("Stage"),
             "Tokens": st.column_config.NumberColumn("Tokens", format="%d"),
         },
     )
-    st.caption(
-        "Overall is the exact API-reported total. Stage allocations are estimates. "
-        "Dynamic SQL planning represents structured-plan output tokens; SQLAlchemy compilation itself uses zero LLM tokens."
-    )
+    with st.popover("About token counts", icon=":material/info:"):
+        st.caption(
+            "Overall is the exact API-reported total. Stage allocations are estimates. "
+            "Dynamic SQL planning represents structured-plan output tokens; SQLAlchemy compilation itself uses zero LLM tokens."
+        )
 
 
 def authenticated_app() -> None:
@@ -323,23 +338,20 @@ def authenticated_app() -> None:
 
     user = st.session_state.current_user
     with st.sidebar:
-        st.divider()
-        st.subheader("Signed in")
-        st.write(user["full_name"])
+        st.markdown(f"**{user['full_name']}**")
         st.caption(f"{user['role']} · {user['organization_code']} · {user['office_type']}")
-        if st.button("New conversation", icon=":material/add_comment:", width="stretch"):
-            st.session_state.conversation_id = None
-            st.session_state.messages = []
-            st.session_state.pending_clarification = None
-            st.session_state.pop("sidebar_usage_query", None)
-            st.switch_page(chat_page)
-        if st.button("Sign out", icon=":material/logout:", width="stretch"):
-            logout()
-            st.rerun()
-        st.divider()
+        with st.container(horizontal=True, gap="small"):
+            if st.button("New", icon=":material/add_comment:", width="stretch"):
+                st.session_state.conversation_id = None
+                st.session_state.messages = []
+                st.session_state.pending_clarification = None
+                st.session_state.pop("sidebar_usage_query", None)
+                st.switch_page(chat_page)
+            if st.button("Sign out", icon=":material/logout:", width="stretch"):
+                logout()
+                st.rerun()
         sidebar_query_usage()
-        st.divider()
-        st.caption("Data access is automatically restricted to your assigned organization hierarchy.")
+        st.caption(":material/security: Access restricted to your assigned organization hierarchy.")
 
     page.run()
 
