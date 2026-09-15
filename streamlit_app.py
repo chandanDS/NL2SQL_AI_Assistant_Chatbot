@@ -7,10 +7,15 @@ existing Streamlit frontend.
 
 from __future__ import annotations
 
+import runpy
+from pathlib import Path
+
 from frontend.cloud_runtime import start_embedded_api
 
 
 start_embedded_api()
 
-# Keep this import last: frontend.app calls st.set_page_config() before UI output.
-from frontend import app as _frontend_app  # noqa: E402,F401
+# Execute the UI as the active Streamlit script. This is more reliable than a
+# module import on Community Cloud, where imported page modules can be retained
+# across script reruns without replaying their top-level Streamlit commands.
+runpy.run_path(str(Path(__file__).parent / "frontend" / "app.py"), run_name="__main__")
