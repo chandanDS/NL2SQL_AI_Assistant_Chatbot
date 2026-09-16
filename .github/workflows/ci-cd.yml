@@ -61,6 +61,7 @@ jobs:
           alembic upgrade head
           python -m data_generator.seed_identity
           python -m data_generator.seed_banking_facts
+          python -m data_generator.seed_ml_leads
       - name: Grant read-only analytics access
         env:
           PGPASSWORD: postgres

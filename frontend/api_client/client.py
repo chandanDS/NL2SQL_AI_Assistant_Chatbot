@@ -73,3 +73,24 @@ class BankingApiClient:
 
     def audit(self, token: str, limit: int = 100) -> dict[str, Any]:
         return self._request("GET", "/audit/events", token, params={"limit": limit})
+
+    def ml_leads(self, token: str, question: str, *, limit: int = 100, offset: int = 0) -> dict[str, Any]:
+        return self._request("POST", "/ml/leads/query", token, json={"question": question, "limit": limit, "offset": offset})
+
+    def export_ml_leads(self, token: str, question: str) -> bytes:
+        try:
+            response = self._client.post(
+                "/ml/leads/export",
+                headers={"Authorization": f"Bearer {token}"},
+                json={"question": question},
+                timeout=120.0,
+            )
+        except httpx.RequestError as exc:
+            raise BackendError(503, "The local FastAPI service is not reachable.") from exc
+        if response.is_error:
+            try:
+                detail = response.json().get("detail", "Excel export failed")
+            except ValueError:
+                detail = "Excel export failed"
+            raise BackendError(response.status_code, str(detail))
+        return response.content

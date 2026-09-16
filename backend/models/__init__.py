@@ -13,6 +13,7 @@ from backend.models.catalog import KpiCatalog
 from backend.models.conversation import ConversationMessage, ConversationSession
 from backend.models.observability import AuditEvent, TokenUsageEvent
 from backend.models.organization import OfficeType, OrganizationHierarchy, OrganizationUnit
+from backend.models.ml_leads import CampaignLead, PropensityLead, UnderwritingLead, RiskReviewLead, RiskMismatchLead
 
 __all__ = [
     "OfficeType",
@@ -35,4 +36,9 @@ __all__ = [
     "User",
     "UserOrganizationAssignment",
     "UserRole",
+    "CampaignLead",
+    "PropensityLead",
+    "UnderwritingLead",
+    "RiskReviewLead",
+    "RiskMismatchLead",
 ]

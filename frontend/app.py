@@ -279,6 +279,92 @@ def audit_page() -> None:
     st.dataframe(frame, hide_index=True, column_config={"created_at":st.column_config.DatetimeColumn("Time"), "details":st.column_config.JsonColumn("Details")})
 
 
+def ai_ml_page() -> None:
+    st.title("AI/ML prediction output")
+    st.caption("Synthetic model-output data. Your existing HO/CO/RO/branch access scope applies.")
+    st.info("Lead scores support outreach and review. They do not replace credit-policy checks or risk-team approval.")
+    st.session_state.setdefault("ml_lead_question", None)
+    st.session_state.setdefault("ml_lead_result", None)
+    st.session_state.setdefault("ml_lead_page", 1)
+    st.session_state.setdefault("ml_lead_export", None)
+
+    prediction_modules = {
+        "Campaign hot leads": "What are the hot personal loan leads for Mumbai branch?",
+        "Risk scorecard": "Who are the risky customers in my branch?",
+        "ML underwriting": "Show pre-approved personal loan customers in my branch",
+        "PL propensity": "Show PL propensity bands in my branch",
+        "Risk-tag review": "Show good customers tagged as bad by the risk team in my branch",
+    }
+    selected_module = st.selectbox(
+        "Prediction Module",
+        ["Select a prediction module", *prediction_modules],
+        key="ml_prediction_module",
+    )
+    if st.button("Prediction Output", disabled=selected_module == "Select a prediction module"):
+        example = prediction_modules[selected_module]
+        st.session_state.ml_lead_question = example
+        st.session_state.ml_lead_page = 1
+        st.session_state.ml_lead_export = None
+        try:
+            st.session_state.ml_lead_result = api_client().ml_leads(st.session_state.access_token, example)
+        except BackendError as exc:
+            st.session_state.ml_lead_result = None
+            st.error(exc.detail)
+
+    if question := st.chat_input("Ask about PL campaign, propensity, underwriting or risk leads", key="ml_chat_input", submit_mode="disable"):
+        st.session_state.ml_lead_question = question
+        st.session_state.ml_lead_page = 1
+        st.session_state.ml_lead_export = None
+        try:
+            st.session_state.ml_lead_result = api_client().ml_leads(st.session_state.access_token, question)
+        except BackendError as exc:
+            st.session_state.ml_lead_result = None
+            st.error(exc.detail)
+
+    result = st.session_state.ml_lead_result
+    if result is None:
+        return
+    total_pages = max(1, (result["total_count"] + 99) // 100)
+    page_number = st.number_input("Result page", min_value=1, max_value=total_pages, value=st.session_state.ml_lead_page, step=1)
+    if page_number != st.session_state.ml_lead_page:
+        st.session_state.ml_lead_page = page_number
+        try:
+            result = api_client().ml_leads(st.session_state.access_token, st.session_state.ml_lead_question, offset=(page_number - 1) * 100)
+            st.session_state.ml_lead_result = result
+        except BackendError as exc:
+            st.error(exc.detail)
+            return
+    with st.chat_message("user"):
+        st.write(st.session_state.ml_lead_question)
+    with st.chat_message("assistant"):
+        st.markdown(f"**{result['total_count']:,} {result['title'].lower()}** in **{result['organization']}**.")
+        st.caption(f"Source: {result['source_table']} · Synthetic data · {result['guidance']}")
+        if result.get("band_counts"):
+            st.table(pd.DataFrame(
+                [{"Propensity band": band.replace("_", " ").title(), "Customers": count}
+                 for band, count in result["band_counts"].items()]
+            ))
+        if result["records"]:
+            st.dataframe(pd.DataFrame(result["records"]), hide_index=True, height=420)
+        else:
+            st.info("No matching synthetic leads were found in your permitted scope.")
+    if result["total_count"]:
+        if st.button("Prepare full Excel download", icon=":material/download:"):
+            try:
+                with st.spinner("Preparing all permitted rows..."):
+                    st.session_state.ml_lead_export = api_client().export_ml_leads(st.session_state.access_token, st.session_state.ml_lead_question)
+            except BackendError as exc:
+                st.error(exc.detail)
+        if st.session_state.ml_lead_export:
+            st.download_button(
+                "Download all matching leads (.xlsx)",
+                data=st.session_state.ml_lead_export,
+                file_name=f"synthetic_pl_{result['use_case']}_leads.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                icon=":material/download:",
+            )
+
+
 def sidebar_query_usage() -> None:
     usage_items = [item for item in st.session_state.messages if item.get("usage")]
     if not usage_items:
@@ -326,6 +412,7 @@ def authenticated_app() -> None:
     pages = {
         "Assistant": [
             chat_page,
+            st.Page(ai_ml_page, title="AI/ML prediction output", icon=":material/target:"),
             st.Page(history_page, title="Session history", icon=":material/history:"),
         ]
     }

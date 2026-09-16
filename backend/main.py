@@ -14,6 +14,7 @@ from backend.api.insights import router as insights_router
 from backend.api.operations import router as operations_router
 from backend.api.scope import router as scope_router
 from backend.api.semantic import router as semantic_router
+from backend.api.ml_leads import router as ml_leads_router
 from backend.db.health import database_health
 from backend.db.analytics_session import get_analytics_engine
 from backend.db.session import get_engine
@@ -52,6 +53,7 @@ app.include_router(intent_router)
 app.include_router(insights_router)
 app.include_router(operations_router)
 app.include_router(semantic_router)
+app.include_router(ml_leads_router)
 
 
 @app.middleware("http")
