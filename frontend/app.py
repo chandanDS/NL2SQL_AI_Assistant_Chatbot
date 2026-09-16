@@ -361,17 +361,16 @@ def ai_ml_page() -> None:
             )
 
     followups = prediction_followups(result["organization"])
-    with st.form("ml_prediction_followup", border=False):
-        selected_followup = st.selectbox(
-            "Next prediction output",
-            ["Select a follow-up question", *followups],
-            key="ml_followup_selection",
-        )
-        followup_submitted = st.form_submit_button(
-            "Run follow-up",
-            disabled=selected_followup == "Select a follow-up question",
-            icon=":material/arrow_forward:",
-        )
+    selected_followup = st.selectbox(
+        "Next prediction output",
+        ["Select a follow-up question", *followups],
+        key="ml_followup_selection",
+    )
+    followup_submitted = st.button(
+        "Run follow-up",
+        disabled=selected_followup == "Select a follow-up question",
+        icon=":material/arrow_forward:",
+    )
     if followup_submitted and selected_followup in followups:
         run_prediction(followups[selected_followup])
         st.rerun()
