@@ -43,6 +43,25 @@ def risk_segment(risk_probability: int, business_unit: str) -> str:
     return "Risk Review"
 
 
+def risk_review_reason(risk_probability: int, business_unit: str) -> str:
+    """Explain the synthetic segment comparison in the review-status column."""
+    baseline = SYNTHETIC_PORTFOLIO_RISK_PROBABILITY.get(business_unit)
+    if baseline is None:
+        return "No synthetic portfolio baseline is configured for this business unit."
+    if risk_probability <= 80:
+        return f"Risk probability {risk_probability}% does not exceed the 80% threshold."
+    ratio = risk_probability / baseline
+    segment = risk_segment(risk_probability, business_unit)
+    if segment == "Super Red":
+        return (f"Risk probability {risk_probability}% exceeds 80% and is {ratio:.2f}x "
+                f"the {business_unit} portfolio baseline ({baseline}%); Super Red (at least 2x).")
+    if segment == "Red":
+        return (f"Risk probability {risk_probability}% exceeds 80% and is {ratio:.2f}x "
+                f"the {business_unit} portfolio baseline ({baseline}%); Red (at least 1.5x).")
+    return (f"Risk probability {risk_probability}% exceeds 80%, but is only {ratio:.2f}x "
+            f"the {business_unit} portfolio baseline ({baseline}%), below the 1.5x rule.")
+
+
 @dataclass(frozen=True)
 class LeadIntent:
     use_case: str
@@ -135,18 +154,16 @@ def _serialize(record, branch_name: str) -> dict:
         "campaign_name", "lead_status", "propensity_score", "propensity_band",
         "suggested_amount", "eligibility_status", "underwriting_score",
         "recommended_limit", "model_version", "risk_score", "risk_band",
-        "review_status", "reason_code", "model_risk_score", "model_risk_band",
+        "review_status", "model_risk_score", "model_risk_band",
         "preferred_contact_time", "preferred_contact_channel", "aa_last_6m_avg_balance",
         "aa_last_6m_debit_amount", "aa_last_6m_credit_amount", "bureau_enquiries_6m",
         "bureau_active_external_loans", "bureau_current_exposure", "bureau_bounces_6m",
         "bureau_max_dpd_6m", "bureau_cibil_score", "offer_amount", "aa_based_offer_amount",
     ):
         if hasattr(record, key):
-            if key == "reason_code" and isinstance(record, RiskReviewLead):
-                continue
             value = getattr(record, key)
             if key == "review_status" and isinstance(record, RiskReviewLead):
-                value = record.reason_code.replace("_", " ").title()
+                value = risk_review_reason(record.risk_score, record.business_unit)
             display_key = key.upper() if key.startswith("aa_") else key
             values[display_key] = float(value) if key in (
                 "suggested_amount", "recommended_limit", "aa_last_6m_avg_balance",
