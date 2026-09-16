@@ -8,6 +8,7 @@ import pandas as pd
 
 from frontend.api_client.client import BackendError, BankingApiClient
 from frontend.components.results import render_result, render_semantic_result
+from frontend.prediction_followups import prediction_followups
 
 
 st.set_page_config(page_title="Banking Data Intelligence Assistant", page_icon=":material/account_balance:", layout="wide")
@@ -288,6 +289,16 @@ def ai_ml_page() -> None:
     st.session_state.setdefault("ml_lead_page", 1)
     st.session_state.setdefault("ml_lead_export", None)
 
+    def run_prediction(question: str) -> None:
+        st.session_state.ml_lead_question = question
+        st.session_state.ml_lead_page = 1
+        st.session_state.ml_lead_export = None
+        try:
+            st.session_state.ml_lead_result = api_client().ml_leads(st.session_state.access_token, question)
+        except BackendError as exc:
+            st.session_state.ml_lead_result = None
+            st.error(exc.detail)
+
     prediction_modules = {
         "Campaign hot leads": "What are the hot personal loan leads for Mumbai branch?",
         "Risk scorecard": "Who are the risky customers in my branch?",
@@ -301,25 +312,10 @@ def ai_ml_page() -> None:
         key="ml_prediction_module",
     )
     if st.button("Prediction Output", disabled=selected_module == "Select a prediction module"):
-        example = prediction_modules[selected_module]
-        st.session_state.ml_lead_question = example
-        st.session_state.ml_lead_page = 1
-        st.session_state.ml_lead_export = None
-        try:
-            st.session_state.ml_lead_result = api_client().ml_leads(st.session_state.access_token, example)
-        except BackendError as exc:
-            st.session_state.ml_lead_result = None
-            st.error(exc.detail)
+        run_prediction(prediction_modules[selected_module])
 
     if question := st.chat_input("Ask about PL campaign, propensity, underwriting or risk leads", key="ml_chat_input", submit_mode="disable"):
-        st.session_state.ml_lead_question = question
-        st.session_state.ml_lead_page = 1
-        st.session_state.ml_lead_export = None
-        try:
-            st.session_state.ml_lead_result = api_client().ml_leads(st.session_state.access_token, question)
-        except BackendError as exc:
-            st.session_state.ml_lead_result = None
-            st.error(exc.detail)
+        run_prediction(question)
 
     result = st.session_state.ml_lead_result
     if result is None:
@@ -363,6 +359,23 @@ def ai_ml_page() -> None:
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 icon=":material/download:",
             )
+
+    followups = prediction_followups(result["organization"])
+    with st.form("ml_prediction_followup", border=False):
+        selected_followup = st.selectbox(
+            "Next prediction output",
+            ["Select a follow-up question", *followups],
+            key="ml_followup_selection",
+        )
+        followup_submitted = st.form_submit_button(
+            "Run follow-up",
+            disabled=selected_followup == "Select a follow-up question",
+            icon=":material/arrow_forward:",
+        )
+    if followup_submitted and selected_followup in followups:
+        run_prediction(followups[selected_followup])
+        st.rerun()
+    st.caption("Or type your own follow-up in the question box below.")
 
 
 def sidebar_query_usage() -> None:
