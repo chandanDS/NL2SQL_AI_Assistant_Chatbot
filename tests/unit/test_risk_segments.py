@@ -24,12 +24,12 @@ def test_risk_segment_thresholds(probability, business_unit, expected):
 
 
 def test_risk_review_reasons_explain_the_matching_threshold():
-    assert "2.02x" in risk_review_reason(81, "TIER_1")
-    assert "Super Red (at least 2x)" in risk_review_reason(81, "TIER_1")
-    assert "1.80x" in risk_review_reason(81, "TIER_2")
-    assert "Red (at least 1.5x)" in risk_review_reason(81, "TIER_2")
+    assert "at least 2x" in risk_review_reason(81, "TIER_1")
+    assert "Super Red" in risk_review_reason(81, "TIER_1")
+    assert "at least 1.5x" in risk_review_reason(81, "TIER_2")
+    assert "Red" in risk_review_reason(81, "TIER_2")
     assert "does not exceed the 80% threshold" in risk_review_reason(80, "TIER_1")
-    assert "below the 1.5x rule" in risk_review_reason(81, "TIER_4")
+    assert "below 1.5x" in risk_review_reason(81, "TIER_4")
 
 
 def test_risk_scorecard_output_uses_reason_as_review_status_and_hides_internal_tags():
@@ -41,13 +41,16 @@ def test_risk_scorecard_output_uses_reason_as_review_status_and_hides_internal_t
         interest_rate_pct=Decimal("12.00"),
         risk_score=81,
         risk_band="HIGH",
+        portfolio_segment_risk_probability=40,
+        risk_segment="Super Red",
         risk_team_tag="HIGH_RISK",
-        review_status="AVOID_PENDING_REVIEW",
+        review_status=risk_review_reason(81, "TIER_1"),
         reason_code="ELEVATED_RISK_SCORE",
     )
     result = _serialize(record, "Mumbai Branch 01")
-    assert "Super Red (at least 2x)" in result["review_status"]
+    assert "at least 2x" in result["review_status"]
     assert result["risk_segment"] == "Super Red"
+    assert result["portfolio_segment_risk_probability"] == 40
     assert "risk_team_tag" not in result
     assert "reason_code" not in result
 

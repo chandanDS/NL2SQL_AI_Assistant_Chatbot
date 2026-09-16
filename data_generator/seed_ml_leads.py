@@ -10,6 +10,7 @@ from sqlalchemy.dialects.postgresql import insert
 
 from backend.db.session import get_session_factory
 from backend.models.ml_leads import CampaignLead, PropensityLead, RiskMismatchLead, RiskReviewLead, UnderwritingLead
+from backend.ml.service import SYNTHETIC_PORTFOLIO_RISK_PROBABILITY, risk_review_reason, risk_segment
 from backend.models.organization import OfficeType, OrganizationUnit
 
 
@@ -148,8 +149,10 @@ def make_rows(branches: list[OrganizationUnit]) -> dict[type, list[dict]]:
                 **_identity(branch, number, names, fake),
                 "risk_score": 70 + number,
                 "risk_band": "HIGH",
+                "portfolio_segment_risk_probability": SYNTHETIC_PORTFOLIO_RISK_PROBABILITY[_business_unit(branch, number)],
+                "risk_segment": risk_segment(70 + number, _business_unit(branch, number)),
                 "risk_team_tag": "HIGH_RISK",
-                "review_status": "AVOID_PENDING_REVIEW",
+                "review_status": risk_review_reason(70 + number, _business_unit(branch, number)),
                 "reason_code": "ELEVATED_RISK_SCORE",
             })
             if number <= 3:

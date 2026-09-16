@@ -83,6 +83,31 @@ def test_lead_use_cases_route_to_separate_outputs(client, question, source_table
         assert record["bureau_current_exposure"] >= 0
         assert record["bureau_bounces_6m"] >= 0
         assert record["bureau_max_dpd_6m"] >= 0
+    if source_table == "ml_pl_risk_review_leads":
+        assert record["portfolio_segment_risk_probability"] > 0
+        assert record["risk_segment"] in {"Super Red", "Red", "Risk Review"}
+        assert record["review_status"].startswith("Risk probability ")
+        assert "risk_team_tag" not in record
+        assert "reason_code" not in record
+
+
+@pytest.mark.integration
+def test_risk_scorecard_segments_are_stored_and_exported(client):
+    headers = _headers(client, "bankuser0001")
+    question = "Who are the risky customers in Mumbai branch?"
+    response = client.post("/ml/leads/query", headers=headers, json={"question": question})
+    assert response.status_code == 200
+    records = response.json()["records"]
+    assert {"Red", "Super Red"}.issubset({row["risk_segment"] for row in records})
+    assert all("risk_team_tag" not in row and "reason_code" not in row for row in records)
+
+    export = client.post("/ml/leads/export", headers=headers, json={"question": question})
+    assert export.status_code == 200
+    workbook = load_workbook(BytesIO(export.content), read_only=True)
+    columns = next(workbook.active.iter_rows(values_only=True))
+    assert {"risk_segment", "portfolio_segment_risk_probability", "review_status"}.issubset(columns)
+    assert "risk_team_tag" not in columns
+    assert "reason_code" not in columns
 
 
 @pytest.mark.integration

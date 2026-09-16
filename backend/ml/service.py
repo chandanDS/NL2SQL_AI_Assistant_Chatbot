@@ -50,16 +50,15 @@ def risk_review_reason(risk_probability: int, business_unit: str) -> str:
         return "No synthetic portfolio baseline is configured for this business unit."
     if risk_probability <= 80:
         return f"Risk probability {risk_probability}% does not exceed the 80% threshold."
-    ratio = risk_probability / baseline
     segment = risk_segment(risk_probability, business_unit)
     if segment == "Super Red":
-        return (f"Risk probability {risk_probability}% exceeds 80% and is {ratio:.2f}x "
-                f"the {business_unit} portfolio baseline ({baseline}%); Super Red (at least 2x).")
+        return (f"Risk probability {risk_probability}% exceeds 80% and is at least 2x "
+                f"the {business_unit} portfolio baseline ({baseline}%): Super Red.")
     if segment == "Red":
-        return (f"Risk probability {risk_probability}% exceeds 80% and is {ratio:.2f}x "
-                f"the {business_unit} portfolio baseline ({baseline}%); Red (at least 1.5x).")
-    return (f"Risk probability {risk_probability}% exceeds 80%, but is only {ratio:.2f}x "
-            f"the {business_unit} portfolio baseline ({baseline}%), below the 1.5x rule.")
+        return (f"Risk probability {risk_probability}% exceeds 80% and is at least 1.5x "
+                f"the {business_unit} portfolio baseline ({baseline}%): Red.")
+    return (f"Risk probability {risk_probability}% exceeds 80%, but is below 1.5x "
+            f"the {business_unit} portfolio baseline ({baseline}%).")
 
 
 @dataclass(frozen=True)
@@ -154,7 +153,7 @@ def _serialize(record, branch_name: str) -> dict:
         "campaign_name", "lead_status", "propensity_score", "propensity_band",
         "suggested_amount", "eligibility_status", "underwriting_score",
         "recommended_limit", "model_version", "risk_score", "risk_band",
-        "review_status", "model_risk_score", "model_risk_band",
+        "portfolio_segment_risk_probability", "risk_segment", "review_status", "model_risk_score", "model_risk_band",
         "preferred_contact_time", "preferred_contact_channel", "aa_last_6m_avg_balance",
         "aa_last_6m_debit_amount", "aa_last_6m_credit_amount", "bureau_enquiries_6m",
         "bureau_active_external_loans", "bureau_current_exposure", "bureau_bounces_6m",
@@ -162,16 +161,12 @@ def _serialize(record, branch_name: str) -> dict:
     ):
         if hasattr(record, key):
             value = getattr(record, key)
-            if key == "review_status" and isinstance(record, RiskReviewLead):
-                value = risk_review_reason(record.risk_score, record.business_unit)
             display_key = key.upper() if key.startswith("aa_") else key
             values[display_key] = float(value) if key in (
                 "suggested_amount", "recommended_limit", "aa_last_6m_avg_balance",
                 "aa_last_6m_debit_amount", "aa_last_6m_credit_amount", "bureau_current_exposure",
                 "offer_amount", "aa_based_offer_amount",
             ) else value
-    if isinstance(record, RiskReviewLead):
-        values["risk_segment"] = risk_segment(record.risk_score, record.business_unit)
     return values
 
 

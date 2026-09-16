@@ -283,7 +283,7 @@ def audit_page() -> None:
 def ai_ml_page() -> None:
     st.title("AI/ML prediction output")
     st.caption("Synthetic model-output data. Your existing HO/CO/RO/branch access scope applies.")
-    st.info("Lead scores support outreach and review. They do not replace credit-policy checks or risk-team approval.")
+    st.info("AI/ML Prediction Output Referred from stored table")
     st.session_state.setdefault("ml_lead_question", None)
     st.session_state.setdefault("ml_lead_result", None)
     st.session_state.setdefault("ml_lead_page", 1)

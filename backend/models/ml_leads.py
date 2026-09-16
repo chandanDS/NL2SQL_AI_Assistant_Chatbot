@@ -79,12 +79,15 @@ class RiskReviewLead(LeadIdentityMixin, Base):
     __table_args__ = (
         UniqueConstraint("customer_ref", "as_of_date"),
         CheckConstraint("risk_score BETWEEN 0 AND 100", name="risk_score_range"),
+        CheckConstraint("risk_segment IN ('Super Red', 'Red', 'Risk Review')", name="risk_segment_values"),
         Index("ix_ml_risk_scope_band", "organization_unit_id", "risk_band"),
     )
     risk_score: Mapped[int] = mapped_column(nullable=False)
     risk_band: Mapped[str] = mapped_column(String(20), nullable=False)
+    portfolio_segment_risk_probability: Mapped[int] = mapped_column(nullable=False)
+    risk_segment: Mapped[str] = mapped_column(String(20), nullable=False)
     risk_team_tag: Mapped[str] = mapped_column(String(20), nullable=False)
-    review_status: Mapped[str] = mapped_column(String(30), nullable=False)
+    review_status: Mapped[str] = mapped_column(String(160), nullable=False)
     reason_code: Mapped[str] = mapped_column(String(40), nullable=False)
 
 
