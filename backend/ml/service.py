@@ -21,6 +21,28 @@ class LeadIntentError(ValueError):
     pass
 
 
+SYNTHETIC_PORTFOLIO_RISK_PROBABILITY = {
+    "TIER_1": 40,
+    "TIER_2": 45,
+    "TIER_3": 50,
+    "TIER_4": 55,
+    "PLTB": 52,
+    "SALPL": 48,
+}
+
+
+def risk_segment(risk_probability: int, business_unit: str) -> str:
+    """Classify synthetic customer risk against its business-unit portfolio baseline."""
+    baseline = SYNTHETIC_PORTFOLIO_RISK_PROBABILITY.get(business_unit)
+    if baseline is None or risk_probability <= 80:
+        return "Risk Review"
+    if risk_probability >= 2 * baseline:
+        return "Super Red"
+    if risk_probability >= 1.5 * baseline:
+        return "Red"
+    return "Risk Review"
+
+
 @dataclass(frozen=True)
 class LeadIntent:
     use_case: str
@@ -41,7 +63,10 @@ def identify_lead_intent(question: str) -> LeadIntent:
     if re.search(r"risky|high.?risk|avoid.{0,30}(?:loan|disburs|customer)|risk scorecard", text):
         return LeadIntent("risk_review", "High-risk customers", RiskReviewLead,
                           (("risk_band", "HIGH"),),
-                          "Risk indicators are for review; follow the bank's credit policy and risk-team decision.")
+                          "Risk segments use illustrative portfolio risk-probability baselines by business unit "
+                          "(Tier 1: 40%, Tier 2: 45%, Tier 3: 50%, Tier 4: 55%, PLTB: 52%, SALPL: 48%). "
+                          "For customer risk probability above 80%, at least 2x baseline is Super Red; "
+                          "at least 1.5x baseline is Red. Follow the bank's credit policy and risk-team decision.")
     if re.search(r"pre.?approved|underwrit|eligib", text):
         return LeadIntent("underwriting", "Pre-approved personal-loan candidates", UnderwritingLead,
                           (("eligibility_status", "PRE_APPROVED"),),
@@ -110,20 +135,26 @@ def _serialize(record, branch_name: str) -> dict:
         "campaign_name", "lead_status", "propensity_score", "propensity_band",
         "suggested_amount", "eligibility_status", "underwriting_score",
         "recommended_limit", "model_version", "risk_score", "risk_band",
-        "risk_team_tag", "review_status", "reason_code", "model_risk_score", "model_risk_band",
+        "review_status", "reason_code", "model_risk_score", "model_risk_band",
         "preferred_contact_time", "preferred_contact_channel", "aa_last_6m_avg_balance",
         "aa_last_6m_debit_amount", "aa_last_6m_credit_amount", "bureau_enquiries_6m",
         "bureau_active_external_loans", "bureau_current_exposure", "bureau_bounces_6m",
         "bureau_max_dpd_6m", "bureau_cibil_score", "offer_amount", "aa_based_offer_amount",
     ):
         if hasattr(record, key):
+            if key == "reason_code" and isinstance(record, RiskReviewLead):
+                continue
             value = getattr(record, key)
+            if key == "review_status" and isinstance(record, RiskReviewLead):
+                value = record.reason_code.replace("_", " ").title()
             display_key = key.upper() if key.startswith("aa_") else key
             values[display_key] = float(value) if key in (
                 "suggested_amount", "recommended_limit", "aa_last_6m_avg_balance",
                 "aa_last_6m_debit_amount", "aa_last_6m_credit_amount", "bureau_current_exposure",
                 "offer_amount", "aa_based_offer_amount",
             ) else value
+    if isinstance(record, RiskReviewLead):
+        values["risk_segment"] = risk_segment(record.risk_score, record.business_unit)
     return values
 
 
