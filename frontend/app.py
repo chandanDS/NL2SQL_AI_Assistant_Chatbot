@@ -289,15 +289,17 @@ def ai_ml_page() -> None:
     st.session_state.setdefault("ml_lead_page", 1)
     st.session_state.setdefault("ml_lead_export", None)
 
-    def run_prediction(question: str) -> None:
+    def run_prediction(question: str) -> bool:
         st.session_state.ml_lead_question = question
         st.session_state.ml_lead_page = 1
         st.session_state.ml_lead_export = None
         try:
             st.session_state.ml_lead_result = api_client().ml_leads(st.session_state.access_token, question)
+            return True
         except BackendError as exc:
             st.session_state.ml_lead_result = None
             st.error(exc.detail)
+            return False
 
     prediction_modules = {
         "Campaign hot leads": "What are the hot personal loan leads for Mumbai branch?",
@@ -306,19 +308,33 @@ def ai_ml_page() -> None:
         "PL propensity": "Show PL propensity bands in my branch",
         "Risk-tag review": "Show good customers tagged as bad by the risk team in my branch",
     }
-    selected_module = st.selectbox(
-        "Prediction Module",
-        ["Select a prediction module", *prediction_modules],
-        key="ml_prediction_module",
-    )
-    if st.button("Prediction Output", disabled=selected_module == "Select a prediction module"):
-        run_prediction(prediction_modules[selected_module])
-
-    if question := st.chat_input("Ask about PL campaign, propensity, underwriting or risk leads", key="ml_chat_input", submit_mode="disable"):
-        run_prediction(question)
+    def prediction_request_form(current_result: dict | None) -> None:
+        choices = prediction_followups(current_result["organization"]) if current_result else prediction_modules
+        with st.form("ml_prediction_request", clear_on_submit=True):
+            selected = st.selectbox(
+                "Prediction module",
+                ["Select a use case", *choices],
+                key="ml_prediction_choice",
+            )
+            free_text = st.text_input(
+                "Or ask a question in your own words",
+                placeholder="For example: Show medium PL propensity customers in my branch",
+                key="ml_prediction_free_text",
+            )
+            submitted = st.form_submit_button(
+                "Explore next prediction" if current_result else "Explore prediction output",
+                icon=":material/auto_awesome:",
+            )
+        if submitted:
+            question = free_text.strip() or choices.get(selected)
+            if not question:
+                st.warning("Select a use case or enter a question.")
+            elif run_prediction(question):
+                st.rerun()
 
     result = st.session_state.ml_lead_result
     if result is None:
+        prediction_request_form(None)
         return
     total_pages = max(1, (result["total_count"] + 99) // 100)
     page_number = st.number_input("Result page", min_value=1, max_value=total_pages, value=st.session_state.ml_lead_page, step=1)
@@ -360,21 +376,7 @@ def ai_ml_page() -> None:
                 icon=":material/download:",
             )
 
-    followups = prediction_followups(result["organization"])
-    selected_followup = st.selectbox(
-        "Next prediction output",
-        ["Select a follow-up question", *followups],
-        key="ml_followup_selection",
-    )
-    followup_submitted = st.button(
-        "Run follow-up",
-        disabled=selected_followup == "Select a follow-up question",
-        icon=":material/arrow_forward:",
-    )
-    if followup_submitted and selected_followup in followups:
-        run_prediction(followups[selected_followup])
-        st.rerun()
-    st.caption("Or type your own follow-up in the question box below.")
+    prediction_request_form(result)
 
 
 def sidebar_query_usage() -> None:
