@@ -14,8 +14,8 @@ def client():
 @pytest.fixture(scope="module")
 def headers(client):
     login = client.post("/auth/login", data={
-        "username": "bankuser0137",
-        "password": get_settings().synthetic_user_password.get_secret_value(),
+        "username": "bankuser001",
+        "password": "bankuser001",
     })
     assert login.status_code == 200
     return {"Authorization": f"Bearer {login.json()['access_token']}"}

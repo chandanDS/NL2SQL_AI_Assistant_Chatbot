@@ -11,14 +11,6 @@ def client():
         yield test_client
 
 
-@pytest.fixture(scope="module")
-def demo_password() -> str:
-    password = get_settings().synthetic_user_password.get_secret_value()
-    if not password:
-        pytest.fail("SYNTHETIC_USER_PASSWORD is not configured")
-    return password
-
-
 def login(client: TestClient, username: str, password: str) -> str:
     response = client.post(
         "/auth/login",
@@ -46,12 +38,12 @@ def get_scope(
 
 
 @pytest.fixture(scope="module")
-def tokens(client: TestClient, demo_password: str) -> dict[str, str]:
+def tokens(client: TestClient) -> dict[str, str]:
     return {
-        "ho": login(client, "bankuser0001", demo_password),
-        "co1": login(client, "bankuser0009", demo_password),
-        "ro1": login(client, "bankuser0041", demo_password),
-        "branch1": login(client, "bankuser0137", demo_password),
+        "ho": login(client, "houser001", "houser001"),
+        "co1": login(client, "couser001", "couser001"),
+        "ro1": login(client, "rouser001", "rouser001"),
+        "branch1": login(client, "bankuser001", "bankuser001"),
     }
 
 
@@ -173,4 +165,3 @@ def test_ho_can_select_any_circle(
 
     assert response.status_code == 200
     assert response.json()["organization_count"] == 37
-

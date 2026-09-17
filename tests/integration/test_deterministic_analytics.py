@@ -17,8 +17,8 @@ def branch_token(client: TestClient) -> str:
     response = client.post(
         "/auth/login",
         data={
-            "username": "bankuser0137",
-            "password": get_settings().synthetic_user_password.get_secret_value(),
+            "username": "bankuser001",
+            "password": "bankuser001",
         },
     )
     assert response.status_code == 200

@@ -8,11 +8,10 @@ class BankingAnalyticsUser(HttpUser):
     wait_time = between(0.5, 1.5)
 
     def on_start(self):
-        password = os.environ.get("LOAD_TEST_PASSWORD")
-        if not password:
-            raise RuntimeError("Set LOAD_TEST_PASSWORD before starting Locust")
+        username = os.environ.get("LOAD_TEST_USERNAME", "bankuser001")
+        password = os.environ.get("LOAD_TEST_PASSWORD", username)
         response = self.client.post("/auth/login", data={
-            "username": os.environ.get("LOAD_TEST_USERNAME", "bankuser0137"),
+            "username": username,
             "password": password,
         }, name="POST /auth/login")
         response.raise_for_status()

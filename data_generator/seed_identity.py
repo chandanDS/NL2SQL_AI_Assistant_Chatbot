@@ -6,7 +6,7 @@ from pwdlib import PasswordHash
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.core.config import get_settings
+from backend.auth.demo_identity import demo_username_for_employee_id
 from backend.db.session import get_session_factory
 from backend.models.identity import Role, User, UserOrganizationAssignment, UserRole
 from backend.models.organization import OfficeType, OrganizationHierarchy, OrganizationUnit
@@ -156,7 +156,6 @@ async def create_users(
     session: AsyncSession,
     roles: dict[str, Role],
     units: dict[OfficeType, list[OrganizationUnit]],
-    password: str,
 ) -> None:
     fake = Faker("en_IN")
     Faker.seed(20260913)
@@ -176,13 +175,15 @@ async def create_users(
 
     for role_code, organization_unit in assignments:
         user_number += 1
-        username = f"bankuser{user_number:04d}"
+        username = demo_username_for_employee_id(f"BNK{user_number:06d}")
+        if username is None:
+            raise RuntimeError(f"No demo username for synthetic user {user_number}")
         user = User(
             employee_id=f"BNK{user_number:06d}",
             username=username,
             email=f"{username}@example.com",
             full_name=fake.name(),
-            password_hash=PASSWORD_HASHER.hash(password),
+            password_hash=PASSWORD_HASHER.hash(username),
         )
         session.add(user)
         await session.flush()
@@ -198,11 +199,6 @@ async def create_users(
 
 
 async def seed() -> None:
-    settings = get_settings()
-    password = settings.synthetic_user_password.get_secret_value()
-    if len(password) < 16:
-        raise RuntimeError("SYNTHETIC_USER_PASSWORD must contain at least 16 characters")
-
     session_factory = get_session_factory()
     async with session_factory() as session, session.begin():
         existing_users = await session.scalar(select(func.count()).select_from(User))
@@ -220,11 +216,10 @@ async def seed() -> None:
 
         units = await create_organization(session)
         roles = await create_roles(session)
-        await create_users(session, roles, units, password)
+        await create_users(session, roles, units)
 
     print("Created 297 organization units, 4 roles and 400 synthetic users.")
 
 
 if __name__ == "__main__":
     asyncio.run(seed())
-

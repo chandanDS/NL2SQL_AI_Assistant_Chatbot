@@ -1,4 +1,5 @@
 import logging
+from hmac import compare_digest
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -6,8 +7,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.auth.dependencies import CurrentUser
+from backend.auth.demo_identity import demo_username_for_employee_id, legacy_username_for_demo
 from backend.auth.jwt import create_access_token
-from backend.auth.password import DUMMY_PASSWORD_HASH, verify_password
+from backend.auth.password import DUMMY_PASSWORD_HASH, password_hasher, verify_password
 from backend.db.session import get_db_session
 from backend.repositories.users import get_user_by_username
 from backend.observability.events import record_audit
@@ -23,9 +25,31 @@ async def login(
     form: Annotated[OAuth2PasswordRequestForm, Depends()],
     session: Annotated[AsyncSession, Depends(get_db_session)],
 ) -> TokenResponse:
-    user = await get_user_by_username(session, form.username)
-    candidate_hash = user.password_hash if user else DUMMY_PASSWORD_HASH
-    password_valid = verify_password(form.password, candidate_hash)
+    requested_username = form.username.strip().lower()
+    user = await get_user_by_username(session, requested_username)
+    if user is None:
+        legacy_username = legacy_username_for_demo(requested_username)
+        if legacy_username is not None:
+            user = await get_user_by_username(session, legacy_username)
+
+    expected_demo_username = (
+        demo_username_for_employee_id(user.employee_id) if user else None
+    )
+    synthetic_record = bool(
+        user
+        and expected_demo_username
+        and user.username in {expected_demo_username, legacy_username_for_demo(expected_demo_username)}
+        and user.email == f"{user.username}@example.com"
+    )
+    demo_user = synthetic_record and requested_username == expected_demo_username
+    if synthetic_record:
+        # Rename and rotate legacy Cloud records on first successful new login.
+        password_valid = demo_user and compare_digest(form.password, requested_username)
+        if not password_valid:
+            verify_password(form.password, DUMMY_PASSWORD_HASH)
+    else:
+        candidate_hash = user.password_hash if user else DUMMY_PASSWORD_HASH
+        password_valid = verify_password(form.password, candidate_hash)
     if user is None or not password_valid or not user.is_active:
         record_audit(session, "LOGIN", "DENIED", "/auth/login", user_id=user.id if user else None, details={"username": form.username[:80]})
         await session.commit()
@@ -35,6 +59,13 @@ async def login(
             detail="Invalid username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+    if demo_user:
+        if user.username != requested_username:
+            user.username = requested_username
+            user.email = f"{requested_username}@example.com"
+        if not verify_password(requested_username, user.password_hash):
+            user.password_hash = password_hasher.hash(requested_username)
 
     access_token, expires_in = create_access_token(user_id=user.id, username=user.username)
     record_audit(session, "LOGIN", "SUCCESS", "/auth/login", user_id=user.id)

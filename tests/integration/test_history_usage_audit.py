@@ -12,13 +12,13 @@ def client():
 
 
 def token(client, username):
-    response = client.post("/auth/login", data={"username": username, "password": get_settings().synthetic_user_password.get_secret_value()})
+    response = client.post("/auth/login", data={"username": username, "password": username})
     assert response.status_code == 200
     return response.json()["access_token"]
 
 
 def test_history_and_usage_are_available_to_authenticated_user(client):
-    headers = {"Authorization": f"Bearer {token(client, 'bankuser0137')}"}
+    headers = {"Authorization": f"Bearer {token(client, 'bankuser001')}"}
     sessions = client.get("/history/sessions", headers=headers)
     usage = client.get("/usage/summary", headers=headers)
     assert sessions.status_code == 200
@@ -28,8 +28,8 @@ def test_history_and_usage_are_available_to_authenticated_user(client):
 
 
 def test_audit_is_ho_only(client):
-    branch = {"Authorization": f"Bearer {token(client, 'bankuser0137')}"}
-    ho = {"Authorization": f"Bearer {token(client, 'bankuser0001')}"}
+    branch = {"Authorization": f"Bearer {token(client, 'bankuser001')}"}
+    ho = {"Authorization": f"Bearer {token(client, 'houser001')}"}
     assert client.get("/audit/events", headers=branch).status_code == 403
     response = client.get("/audit/events", headers=ho)
     assert response.status_code == 200

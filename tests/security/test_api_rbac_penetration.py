@@ -14,16 +14,43 @@ def client():
 def _token(client, username):
     response = client.post("/auth/login", data={
         "username": username,
-        "password": get_settings().synthetic_user_password.get_secret_value(),
+        "password": username,
     })
     assert response.status_code == 200
     return response.json()["access_token"]
 
 
+@pytest.mark.security
+def test_demo_login_uses_username_and_rejects_previous_shared_password(client):
+    username = "houser001"
+    shared_password = get_settings().synthetic_user_password.get_secret_value()
+    if shared_password and shared_password != username:
+        old_login = client.post(
+            "/auth/login",
+            data={"username": username, "password": shared_password},
+        )
+        assert old_login.status_code == 401
+
+    current_login = client.post(
+        "/auth/login",
+        data={"username": username, "password": username},
+    )
+    assert current_login.status_code == 200
+
+
+@pytest.mark.security
+def test_legacy_four_digit_username_is_not_accepted(client):
+    response = client.post(
+        "/auth/login",
+        data={"username": "bankuser0002", "password": "bankuser0002"},
+    )
+    assert response.status_code == 401
+
+
 @pytest.fixture(scope="module")
 def access(client):
-    ho = _token(client, "bankuser0001")
-    branch = _token(client, "bankuser0137")
+    ho = _token(client, "houser001")
+    branch = _token(client, "bankuser001")
     scope = client.get("/auth/scope", headers={"Authorization": f"Bearer {ho}"}).json()
     ro_id = next(item["id"] for item in scope["organizations"] if item["code"] == "RO001")
     return branch, ro_id

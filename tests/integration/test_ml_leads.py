@@ -18,7 +18,7 @@ def client():
 def _headers(client, username):
     response = client.post("/auth/login", data={
         "username": username,
-        "password": get_settings().synthetic_user_password.get_secret_value(),
+        "password": username,
     })
     assert response.status_code == 200
     return {"Authorization": f"Bearer {response.json()['access_token']}"}
@@ -26,7 +26,7 @@ def _headers(client, username):
 
 @pytest.mark.integration
 def test_mumbai_hot_leads_and_excel_export(client):
-    headers = _headers(client, "bankuser0001")
+    headers = _headers(client, "houser001")
     question = "What are the hot personal loan leads for Mumbai branch?"
     response = client.post("/ml/leads/query", headers=headers, json={"question": question})
     assert response.status_code == 200
@@ -63,7 +63,7 @@ def test_mumbai_hot_leads_and_excel_export(client):
     ("Show high propensity PL customers in my branch", "ml_pl_propensity_leads"),
 ])
 def test_lead_use_cases_route_to_separate_outputs(client, question, source_table):
-    response = client.post("/ml/leads/query", headers=_headers(client, "bankuser0001"), json={"question": question})
+    response = client.post("/ml/leads/query", headers=_headers(client, "houser001"), json={"question": question})
     assert response.status_code == 200
     assert response.json()["source_table"] == source_table
     assert response.json()["total_count"] > 0
@@ -93,7 +93,7 @@ def test_lead_use_cases_route_to_separate_outputs(client, question, source_table
 
 @pytest.mark.integration
 def test_risk_scorecard_segments_are_stored_and_exported(client):
-    headers = _headers(client, "bankuser0001")
+    headers = _headers(client, "houser001")
     question = "Who are the risky customers in Mumbai branch?"
     response = client.post("/ml/leads/query", headers=headers, json={"question": question})
     assert response.status_code == 200
@@ -112,7 +112,7 @@ def test_risk_scorecard_segments_are_stored_and_exported(client):
 
 @pytest.mark.integration
 def test_propensity_ids_names_and_delinquency_are_consistent(client):
-    headers = _headers(client, "bankuser0001")
+    headers = _headers(client, "houser001")
     campaign = client.post("/ml/leads/query", headers=headers, json={
         "question": "Show hot personal loan leads for Mumbai branch",
     }).json()["records"]
@@ -144,7 +144,7 @@ def test_propensity_ids_names_and_delinquency_are_consistent(client):
 
 @pytest.mark.integration
 def test_all_propensity_bands_and_explicit_band_queries(client):
-    headers = _headers(client, "bankuser0001")
+    headers = _headers(client, "houser001")
     all_bands = client.post("/ml/leads/query", headers=headers, json={
         "question": "What are the distinct propensity bands for the bank as a whole?",
     })
@@ -170,7 +170,7 @@ def test_all_propensity_bands_and_explicit_band_queries(client):
 
 @pytest.mark.security
 def test_branch_cannot_read_mumbai_or_bank_wide_leads(client):
-    headers = _headers(client, "bankuser0137")
+    headers = _headers(client, "bankuser001")
     for question in (
         "Show hot PL leads for Mumbai branch",
         "Show hot PL leads for the bank as a whole",

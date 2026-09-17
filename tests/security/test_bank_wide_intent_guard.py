@@ -15,8 +15,8 @@ def test_branch_user_cannot_request_bank_wide_analytics(client: TestClient):
     login = client.post(
         "/auth/login",
         data={
-            "username": "bankuser0137",
-            "password": get_settings().synthetic_user_password.get_secret_value(),
+            "username": "bankuser001",
+            "password": "bankuser001",
         },
     )
     assert login.status_code == 200, login.text
